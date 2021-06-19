@@ -8,7 +8,7 @@ function ProjectScreen({ navigation })
         <View style={styles.item}>
             <View style={styles.itemLeft}>
                 <View style={styles.circle}></View>
-                <Text style={styles.itemText}>ngehe</Text>
+                <Text style={styles.itemText}>This is the Project Screen!</Text>
             </View>
         </View>
     )
