@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A to-do app with pretty animations! 🎉 ",
+    "githubUrl": "https://github.com/benedictusalvian/todoApp"
   }
 }
