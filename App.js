@@ -1,27 +1,62 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Task from './components/Task';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import ProjectScreen from './components/ProjectScreen';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getData } from './API';
 
-export default function App() {
+function HomeScreen( {navigation} ) {
 
-  const data = ["Yo Mama", "Etc"]
+  // const data = ["Yo Mama", "Etc"]
 
-  const titles = data.map((obj, id) => {
-    return <Task key={id} text={obj}/>
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+      const fetchData = async() => {
+          const data = await getData();
+          setData(data);
+      };
+
+    if (data.length === 0) {
+        fetchData(data);
+    }
+  }, [data]);
+
+  const titles = data.map(({key, title}) => {
+    return <TouchableOpacity key={key} onPress={() => navigation.navigate('Project')}>
+            <Task text={title}/>
+          </TouchableOpacity>
   })
-
+  
   return (
     <View style={styles.container}>
-      <View style={styles.tasksWrapper}>
-        <Text style={styles.sectionTitle}>Today's tasks</Text>
+    <View style={styles.tasksWrapper}>
+      <Text style={styles.sectionTitle}>Today's tasks</Text>
 
-        <View style={styles.items}>
-          {titles}
-        </View>
-
+      <View style={styles.items}>
+        {titles}
       </View>
+
     </View>
+  </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Project" component={ProjectScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
