@@ -1,27 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Animated, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import Task from './Task';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import ProjectScreen from './ProjectScreen';
-import { useState } from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import Project from './Project';
-import { getData } from '../API';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from '../redux/actions';
 
 function HomeScreen( {navigation} ) {
 
-  const [data, setData] = useState([]);
+  const data = useSelector(state => state.tasks);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-      const fetchData = async() => {
-          const data = await getData();
-          setData(data);
-      };
-
+  useEffect(( ) => {
     if (data.length === 0) {
-        fetchData(data);
+        dispatch(fetchData());
     }
   }, [data]);
 
