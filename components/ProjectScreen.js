@@ -1,46 +1,46 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import Task from './Task';
 
 function ProjectScreen({ navigation })
 {
     
     return(
-        <View style={styles.item}>
-            <View style={styles.itemLeft}>
-                <View style={styles.circle}></View>
-                <Text style={styles.itemText}>This is the Project Screen!</Text>
-            </View>
+
+        <View style={styles.container}>
+        <View style={styles.tasksWrapper}>
+          <Text style={styles.sectionTitle}>Tasks</Text>
+    
+          <View style={styles.items}>
+            <Task text={"Task 1"}/>
+            <Task text={"Task 2"}/>
+            <Task text={"Task 3"}/>
+            <Task text={"Task 4"}/>
+            <Task text={"Task 5"}/>
+          </View>
+    
         </View>
+      </View>
     )
 }
 
+
 const styles = StyleSheet.create({
-    item: {
-        backgroundColor: '#FFF',
-        padding: 15,
-        borderRadius: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 20,
+    container: {
+      flex: 1,
+      backgroundColor: '#E8EAED',
     },
-    itemLeft: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        flexWrap: 'wrap',
+    tasksWrapper: {
+      paddingTop: 80,
+      paddingHorizontal: 20,
     },
-    circle: {
-        width: 20,
-        height: 20,
-        backgroundColor: '#FFF',
-        opacity: 0.4,
-        borderWidth: 3,
-        borderRadius: 15,
-        marginRight: 15,
-        borderColor: '#55BCF6'
+    sectionTitle: {
+      fontSize: 24,
+      fontWeight: 'bold',
     },
-    itemText: {
-        maxWidth: '80%',
+    items: {
+      marginTop: 30,
     },
-})
+  });
 
 export default ProjectScreen;
