@@ -6,7 +6,7 @@ import Project from './Project';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from '../redux/actions';
 
-function HomeScreen( {navigation} ) {
+function HomeScreen( {navigation, setPosition} ) {
 
   const data = useSelector(state => state.tasks);
   const dispatch = useDispatch();
@@ -26,8 +26,8 @@ function HomeScreen( {navigation} ) {
     <View style={styles.tasksWrapper}>
       <Text style={styles.sectionTitle}>Projects</Text>
       <View style={styles.projects}>
-        <Project key={1} text='Project 1' navigation={navigation}></Project>
-        <Project key={2} text='Project 2' navigation={navigation}></Project>
+        <Project key={1} text='Project Title' navigation={navigation} setPosition={setPosition}></Project>
+        <Project key={2} text='Project Title' navigation={navigation} setPosition={setPosition}></Project>
       </View>
       <Text style={styles.sectionTitle}>Today</Text>
       <View style={styles.items}>

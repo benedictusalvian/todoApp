@@ -16,3 +16,10 @@ export const fetchDataSuccess = results => {
         payload: results,
     };
 };
+
+export const updatePosition = coordinates => {
+    return {
+        type: 'UPDATEPOSITION',
+        payload: coordinates,
+    };
+};

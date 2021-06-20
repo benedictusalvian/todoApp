@@ -1,21 +1,23 @@
 import React from 'react';
 import { Animated, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { useDispatch, useSelector } from 'react-redux';
+
+// const position = useSelector(state => state.position);
+// const dispatch = useDispatch();
 
 const Project = (props) => {
 
-    const {text, navigation} = props
+    const {text, navigation, setPosition} = props
 
     return(
-        <TouchableOpacity onPress={() => {navigation.navigate('Project Title');}}>
-            <Animated.View>
-                <View style={styles.item}>
-                    <Text styles={styles.text}>{text}</Text>
-                </View>
-            </Animated.View>
+            <TouchableOpacity onPress={({ nativeEvent: { pageX, pageY } }) => {
+                setPosition({ x: pageX, y: pageY, });
+                navigation.navigate("Project Title");
+            }}>
+                    <View style={styles.item}>
+                        <Text styles={styles.text}>{text}</Text>
+                    </View>
             </TouchableOpacity>
-
     )
 }
 

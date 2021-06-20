@@ -1,15 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { useSelector } from 'react-redux';
-import Task from './Task';
+import Task, { StepbyStepFade } from './Task';
 
 function ProjectScreen({ navigation })
 {
   const data = useSelector(state => state.tasks);
 
   const titles = data.map(({key, title}) => {
-    return <Task key={key} text={title}/>
-  })
+    return (
+      <StepbyStepFade step={key}>
+        <Task text={title}/>
+      </StepbyStepFade>
+  )})
 
     return(
 

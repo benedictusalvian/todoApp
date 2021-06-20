@@ -1,19 +1,39 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Animated, View, Text, StyleSheet } from 'react-native';
 
-const Task = (props) => {
+export const Task = (props) => {
 
     const {text} = props
 
     return(
-        <View style={styles.item}>
+            <View style={styles.item}>
             <View style={styles.itemLeft}>
                 <View style={styles.circle}></View>
                 <Text style={styles.itemText}>{text}</Text>
             </View>
-        </View>
+            </View>
     )
 }
+
+export const StepbyStepFade = ({ step, children }) => {
+
+    const opacity = useRef(new Animated.Value(0)).current;
+  
+    useEffect(() => {
+      Animated.timing(opacity, {
+        toValue: 1,
+        duration: 200,
+        delay: 400 + 100 * step,
+      }).start();
+    }, [opacity]);
+
+    return (
+        <Animated.View style={{opacity: opacity}}>
+          {children}
+        </Animated.View>
+      );
+}
+
 
 const styles = StyleSheet.create({
     item: {
