@@ -1,24 +1,24 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { useSelector } from 'react-redux';
 import Task from './Task';
 
 function ProjectScreen({ navigation })
 {
-    
+  const data = useSelector(state => state.tasks);
+
+  const titles = data.map(({key, title}) => {
+    return <Task key={key} text={title}/>
+  })
+
     return(
 
         <View style={styles.container}>
         <View style={styles.tasksWrapper}>
           <Text style={styles.sectionTitle}>Tasks</Text>
-    
           <View style={styles.items}>
-            <Task text={"Task 1"}/>
-            <Task text={"Task 2"}/>
-            <Task text={"Task 3"}/>
-            <Task text={"Task 4"}/>
-            <Task text={"Task 5"}/>
+            {titles}
           </View>
-    
         </View>
       </View>
     )
